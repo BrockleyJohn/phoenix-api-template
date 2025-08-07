@@ -23,6 +23,7 @@ $response = [
     ],
 ];
 
+require language::map_to_translation('system/versioned/1.0.9.3/split_page_results.php'); // need to figure how catalog does this!!
 require 'includes/system/segments/sortable_product_listing.php';
 
 header('Content-Type: application/json');

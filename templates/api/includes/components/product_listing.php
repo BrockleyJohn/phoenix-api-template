@@ -27,14 +27,16 @@ if ($listing_split->number_of_rows > 0) {
     $response['data']['listing'] = [
         'product_count' => $listing_split->number_of_rows,
         'page_count' => $listing_split->number_of_pages,
-        'current_page' => $listing_split->current_page,
+        'current_page' => $listing_split->current_page_number,
     ];
 
     $response['data']['products'] = [];
     $listing_query = $GLOBALS['db']->query($listing_split->sql_query);
     while ($listing = $listing_query->fetch_assoc()) {
         $listing['link'] = Product::build_link($listing['products_id'], null);
-        $response['data']['products'][] = new Product($listing);
+        $response['data']['products'][] = (new Product($listing))->toAPI();
+        $product = new Product($listing);
+        error_log(print_r($product, true));
     }
 }
     
