@@ -27,6 +27,8 @@ $response = [
     ],
 ];
 
+Guarantor::ensure_global('category_tree');
+
 try {
     $response['data']['view'] = 'nested_category';
     $response['data']['category_id'] = $current_category_id ?? 0;
