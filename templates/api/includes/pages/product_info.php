@@ -11,7 +11,7 @@
 */
 
 // Ensure all product data is loaded
-foreach (array_keys($product->get_capabilities()) as $capability) {
+foreach (array_keys($product->list_all_capabilities()) as $capability) {
     $product->get($capability);
 }
 
@@ -19,7 +19,7 @@ $response = [
     'data' => [
         'page' => 'product_info',
         'timestamp' => date('c'),
-        'product' => $product,
+        'product' => $product->toAPI(),
     ],
     'status' => 'success',
     'meta' => [
@@ -29,6 +29,6 @@ $response = [
 ];
 
 header('Content-Type: application/json');
+http_response_code(200);
 echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-http_response_code(200);
